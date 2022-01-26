@@ -1,4 +1,4 @@
-package main
+package cmd
 
 import (
 	"fmt"
@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 )
 
-func main() {
+func Cmd() {
 	path, err := os.Getwd()
 	if err != nil {
 		log.Println(err)
