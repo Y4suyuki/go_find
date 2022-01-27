@@ -5,17 +5,22 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+
+	"github.com/y4suyuki/go_find/matcher"
 )
 
 func Cmd() {
-	path, err := os.Getwd()
+	root, err := os.Getwd()
 	if err != nil {
 		log.Println(err)
 	}
 
 	var files []string
 
-	xerr := filepath.Walk(path, func(path string, info os.FileInfo, err error) error {
+	xerr := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+		if matcher.MatchHiddenFile(path) {
+			return nil
+		}
 		files = append(files, path)
 		return nil
 	})
@@ -28,5 +33,5 @@ func Cmd() {
 		fmt.Println(file)
 	}
 
-	fmt.Println(path)
+	fmt.Println(root)
 }
