@@ -21,7 +21,11 @@ func Cmd() {
 		if matcher.MatchHiddenFile(path) {
 			return nil
 		}
-		files = append(files, path)
+		out_path, err := filepath.Rel(root, path)
+		if err != nil {
+			fmt.Errorf("Oh no!, %e", err)
+		}
+		files = append(files, out_path)
 		return nil
 	})
 
