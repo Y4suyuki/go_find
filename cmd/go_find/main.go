@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"flag"
 	"fmt"
 	"log"
 	"os"
@@ -9,8 +10,14 @@ import (
 	"github.com/y4suyuki/go_find/matcher"
 )
 
+var rootDir = flag.String("d", ".", "root directory to search files")
+
 func Cmd() {
-	root, err := os.Getwd()
+
+	flag.Parse()
+
+	root, err := filepath.Abs(*rootDir)
+
 	if err != nil {
 		log.Println(err)
 	}
