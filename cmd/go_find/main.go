@@ -15,8 +15,6 @@ func Cmd() {
 		log.Println(err)
 	}
 
-	var files []string
-
 	xerr := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if matcher.MatchHiddenFile(path) {
 			return nil
@@ -25,16 +23,12 @@ func Cmd() {
 		if err != nil {
 			fmt.Errorf("Oh no!, %e", err)
 		}
-		files = append(files, out_path)
+		fmt.Println(out_path)
 		return nil
 	})
 
 	if xerr != nil {
 		panic(err)
-	}
-
-	for _, file := range files {
-		fmt.Println(file)
 	}
 
 	fmt.Println(root)
