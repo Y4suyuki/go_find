@@ -15,7 +15,7 @@ func Cmd() {
 		log.Println(err)
 	}
 
-	xerr := filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
+	xerr := filepath.WalkDir(root, func(path string, d os.DirEntry, err error) error {
 		if matcher.MatchHiddenFile(path) {
 			return nil
 		}
